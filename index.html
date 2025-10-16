@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Standoff2 Drop2 — Продай голду</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="index">
+
+<header class="topbar">
+  <div class="logo">Standoff2 Drop2</div>
+  <nav class="nav" role="navigation" aria-label="Главное меню">
+    <a href="index.html" class="nav-btn">Главная</a>
+    <a href="reviews.html" class="nav-btn">Отзывы</a>
+    <a href="faq.html" class="nav-btn">FAQ</a>
+    <a id="botTop" class="nav-btn" href="#" target="_blank" rel="noopener">🤖 Бот в Telegram</a>
+    <a id="tgTop" class="nav-btn" href="https://t.me/awdad21" target="_blank" rel="noopener">✉️ Написать админу</a>
+  </nav>
+</header>
+
+<main class="hero">
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="wrap">
+    <section class="left">
+      <div class="badge">💬 Твоя голда под защитой неона</div>
+      <h1>Продай голду Standoff 2 — быстро и безопасно</h1>
+      <p class="lead">Мгновенная скупка по фиксированному курсу. Открой 3D‑калькулятор, узнай сумму и напиши админу для подтверждения сделки.</p>
+
+      <div class="actions">
+        <button id="openCalc" class="btn primary">⚡ Продать голду</button>
+        <a href="reviews.html" class="btn outline">Отзывы</a>
+      </div>
+
+      <div class="note">Курс: <strong>1 голд = 1.2 ₽</strong> • Гарантии • Быстрая связь</div>
+
+      <div class="counter-wrap">
+        <div class="counter-label">Довольных клиентов</div>
+        <div id="clientsCounter" class="counter">12 438</div>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="scene" id="sceneCard" aria-hidden="true">
+        <!-- vault art -->
+        <svg viewBox="0 0 320 320" class="vault" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="rim" x1="0" x2="1"><stop offset="0%" stop-color="#00ffff"/><stop offset="60%" stop-color="#ff00d9"/><stop offset="100%" stop-color="#ffd700"/></linearGradient>
+            <radialGradient id="gold" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff8d1"/><stop offset="50%" stop-color="#ffd700"/></radialGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+          <circle cx="160" cy="160" r="120" stroke="url(#rim)" stroke-width="6" fill="none" style="filter:url(#glow)"/>
+          <ellipse cx="160" cy="150" rx="96" ry="70" fill="rgba(255,255,255,0.03)"/>
+          <g transform="translate(50,60)">
+            <ellipse cx="110" cy="170" rx="90" ry="36" fill="url(#gold)"/>
+            <g id="coins">
+              <circle cx="70" cy="120" r="18" fill="#FFD700" stroke="#e6c400"/>
+              <circle cx="120" cy="100" r="22" fill="#ffd24d" stroke="#e6c400"/>
+              <circle cx="150" cy="140" r="16" fill="#ffc700" stroke="#e6c400"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- Calculator modal (3D hologram) -->
+<div id="calcModal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop" id="backdrop"></div>
+  <div class="holo" role="dialog" aria-modal="true" aria-labelledby="holoTitle">
+    <button class="close" id="closeCalc" aria-label="Закрыть">✕</button>
+    <h2 id="holoTitle">3D — Калькулятор скупки</h2>
+    <div class="holo-body">
+      <label for="goldInput">Количество голды</label>
+      <input id="goldInput" type="number" min="1" inputmode="numeric" placeholder="Введите количество" />
+      <div class="rate">Курс: <strong>1 голд = 1.2 ₽</strong></div>
+      <button id="calcSell" class="btn primary full">Посчитать</button>
+      <div id="holoResult" class="holo-result" aria-live="polite"></div>
+      <div class="holo-actions">
+        <button id="adminBtn" class="btn neon full">Написать админу</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  © 2025 Standoff2 Drop2 — Все права защищены
+</footer>
+
+<!-- cursor glow element -->
+<div id="cursorGlow" aria-hidden="true"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
