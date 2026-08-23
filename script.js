@@ -1,18 +1,45 @@
 // final script - integrates all features including bg motion, particles, counter, modal, faq, sounds
 document.addEventListener('DOMContentLoaded', ()=>{
 
-  const TELEGRAM_USERNAME = 'awdad21';
+  // ============ НАСТРОЙКИ ============
+  const TELEGRAM_USERNAME = 'avert2';  // ← АДМИН
+  const BOT_USERNAME = 'Standoff2_Droq2bot';  // ← БОТ
+  
   const TELEGRAM_LINK = 'https://t.me/' + TELEGRAM_USERNAME;
   const TG_APP = 'tg://resolve?domain=' + TELEGRAM_USERNAME;
-  const BOT_LINK_PLACEHOLDER = '#';
+  const BOT_LINK = 'https://t.me/' + BOT_USERNAME;
+  const BOT_APP = 'tg://resolve?domain=' + BOT_USERNAME;
 
   // fill bot top links
   const botTop = document.getElementById('botTop');
-  if(botTop) botTop.href = BOT_LINK_PLACEHOLDER;
+  if(botTop) {
+    botTop.href = BOT_LINK;
+    botTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { window.location = BOT_APP; } catch(e) {}
+      setTimeout(() => { window.open(BOT_LINK, '_blank'); }, 700);
+    });
+  }
+  
   const botTopR = document.getElementById('botTopR');
-  if(botTopR) botTopR.href = BOT_LINK_PLACEHOLDER;
+  if(botTopR) {
+    botTopR.href = BOT_LINK;
+    botTopR.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { window.location = BOT_APP; } catch(e) {}
+      setTimeout(() => { window.open(BOT_LINK, '_blank'); }, 700);
+    });
+  }
+  
   const botTopF = document.getElementById('botTopF');
-  if(botTopF) botTopF.href = BOT_LINK_PLACEHOLDER;
+  if(botTopF) {
+    botTopF.href = BOT_LINK;
+    botTopF.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { window.location = BOT_APP; } catch(e) {}
+      setTimeout(() => { window.open(BOT_LINK, '_blank'); }, 700);
+    });
+  }
 
   // touch detection
   const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
@@ -142,6 +169,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const tgTop = document.getElementById('tgTop');
   if(tgTop){
     tgTop.addEventListener('click', (e)=>{ e.preventDefault(); playTick(); try{ window.location = TG_APP; }catch(e){} setTimeout(()=>{ window.open(TELEGRAM_LINK, '_blank'); },700); });
+  }
+  
+  const tgTopR = document.getElementById('tgTopR');
+  if(tgTopR){
+    tgTopR.addEventListener('click', (e)=>{ e.preventDefault(); playTick(); try{ window.location = TG_APP; }catch(e){} setTimeout(()=>{ window.open(TELEGRAM_LINK, '_blank'); },700); });
+  }
+  
+  const tgTopF = document.getElementById('tgTopF');
+  if(tgTopF){
+    tgTopF.addEventListener('click', (e)=>{ e.preventDefault(); playTick(); try{ window.location = TG_APP; }catch(e){} setTimeout(()=>{ window.open(TELEGRAM_LINK, '_blank'); },700); });
   }
 
   // FAQ toggle
