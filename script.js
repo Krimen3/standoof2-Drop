@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', ()=>{
 
   // ============ НАСТРОЙКИ ============
-  const TELEGRAM_USERNAME = 'avert2';  // ← АДМИН
-  const BOT_USERNAME = 'Standoff2_Droq2bot';  // ← БОТ
+  const TELEGRAM_USERNAME = 'kreunen';
+const BOT_USERNAME = 'Standoff2_Droq2bot';  // ← БОТ
   
   const TELEGRAM_LINK = 'https://t.me/' + TELEGRAM_USERNAME;
   const TG_APP = 'tg://resolve?domain=' + TELEGRAM_USERNAME;
