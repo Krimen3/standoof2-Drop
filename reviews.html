@@ -1,152 +1,382 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Отзывы — Standoff2 Drop2</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Отзывы — Standoff2 Drop2</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* стили для отзывов с раскрытием */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .review-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.3);
+      border-color: rgba(0,255,255,0.08);
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px 12px 18px;
+    }
+    .review-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #0a0a10;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #ffd700, #ff6b00);
+      box-shadow: 0 4px 20px rgba(255,215,0,0.12);
+    }
+    .review-avatar.green { background: linear-gradient(135deg, #00ff88, #00cc66); }
+    .review-avatar.pink { background: linear-gradient(135deg, #ff44cc, #ff0088); }
+    .review-avatar.blue { background: linear-gradient(135deg, #44aaff, #0066ff); }
+    .review-avatar.purple { background: linear-gradient(135deg, #aa66ff, #6600cc); }
+    .review-avatar.orange { background: linear-gradient(135deg, #ff8844, #ff4400); }
+    .review-avatar.cyan { background: linear-gradient(135deg, #00ffcc, #00cc99); }
+    .review-avatar.red { background: linear-gradient(135deg, #ff4466, #cc0033); }
+    .review-avatar.lime { background: linear-gradient(135deg, #aaff44, #66cc00); }
+
+    .review-nick {
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+    }
+    .review-amount {
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .review-date {
+      font-size: 11px;
+      color: #666;
+      margin-left: auto;
+    }
+    .review-preview {
+      padding: 0 18px 12px 18px;
+      color: #aaa;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .review-preview .arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+      margin-left: 6px;
+      color: var(--neon-blue);
+    }
+    .review-preview .arrow.open {
+      transform: rotate(180deg);
+    }
+    .review-full {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.2, 0.9, 0.25, 1), padding 0.3s, opacity 0.3s;
+      opacity: 0;
+      padding: 0 18px;
+    }
+    .review-full.open {
+      max-height: 400px;
+      opacity: 1;
+      padding: 0 18px 16px 18px;
+    }
+    .review-full .message {
+      background: rgba(255,255,255,0.03);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border-left: 3px solid var(--neon-blue);
+      color: #dcdcdc;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .review-full .admin-reply {
+      margin-top: 10px;
+      background: rgba(0,255,255,0.04);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border-left: 3px solid var(--gold);
+      color: #cfcfcf;
+      font-size: 13px;
+    }
+    .review-full .admin-reply .admin-label {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 12px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .review-full .admin-reply .admin-label span {
+      background: linear-gradient(135deg, #ffd700, #ff8800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+    .review-stars {
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 980px) {
+      .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body data-page="reviews">
+
 <header class="topbar">
   <div class="logo">Standoff2 Drop2</div>
   <nav class="nav">
     <a href="index.html" class="nav-btn">Главная</a>
     <a href="reviews.html" class="nav-btn">Отзывы</a>
     <a href="faq.html" class="nav-btn">FAQ</a>
-    <a id="botTopR" class="nav-btn" href="#" target="_blank" rel="noopener">🤖 Бот в Telegram</a>
-    <a id="tgTopR" class="nav-btn" href="https://t.me/avert2" target="_blank" rel="noopener">✉️ Написать админу</a>
+    <a href="https://t.me/kreunen" target="_blank" rel="noopener" class="channel-btn">📢 Наш канал</a>
+<a id="tgTopR" class="nav-btn" href="https://t.me/kreunen" target="_blank" rel="noopener">✉️ Админ</a>
   </nav>
 </header>
 
 <main class="content">
-  <h1>Отзывы наших клиентов</h1>
-  <div class="reviews">
+  <h1>⭐ Отзывы наших клиентов</h1>
+  <p style="color:#999;text-align:center;margin-bottom:10px;">Нажмите на отзыв, чтобы прочитать полное сообщение и ответ админа</p>
 
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>И</span></div>
-    <div class="review-body">
-      <p class="text">Быстро и честно. Деньги пришли мгновенно, связь отличная.</p>
-      <div class="meta">— Иван, 1200 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>М</span></div>
-    <div class="review-body">
-      <p class="text">Оформил продажу за 5 минут. Рекомендую!</p>
-      <div class="meta">— Мария, 500 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>С</span></div>
-    <div class="review-body">
-      <p class="text">Крутой неоновый стиль сайта :) Сделка прошла без проблем.</p>
-      <div class="meta">— Сергей, 2500 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>А</span></div>
-    <div class="review-body">
-      <p class="text">Очень доволен. Все прозрачно и удобно.</p>
-      <div class="meta">— Алексей, 300 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>О</span></div>
-    <div class="review-body">
-      <p class="text">Профессионально и вежливо, оплата пришла сразу.</p>
-      <div class="meta">— Ольга, 800 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>Д</span></div>
-    <div class="review-body">
-      <p class="text">Безопасно и быстро. Повторюсь ещё раз.</p>
-      <div class="meta">— Дмитрий, 150 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>Е</span></div>
-    <div class="review-body">
-      <p class="text">Отличный сервис, удобный калькулятор и связь в Telegram.</p>
-      <div class="meta">— Елена, 420 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>Н</span></div>
-    <div class="review-body">
-      <p class="text">Цена адекватная, поддержка ответила быстро.</p>
-      <div class="meta">— Никита, 999 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>К</span></div>
-    <div class="review-body">
-      <p class="text">Ни одной проблемы — всё прошло гладко.</p>
-      <div class="meta">— Анна, 60 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>В</span></div>
-    <div class="review-body">
-      <p class="text">Сделал сделку поздно вечером — ответили и оплатили.</p>
-      <div class="meta">— Влад, 2000 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>К</span></div>
-    <div class="review-body">
-      <p class="text">Удобно, красиво и оперативно. Спасибо!</p>
-      <div class="meta">— Кира, 340 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>П</span></div>
-    <div class="review-body">
-      <p class="text">Ребята знают своё дело. Советую всем.</p>
-      <div class="meta">— Павел, 710 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>И</span></div>
-    <div class="review-body">
-      <p class="text">Приятный интерфейс, никаких задержек с выплатой.</p>
-      <div class="meta">— Игорь, 111 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>Т</span></div>
-    <div class="review-body">
-      <p class="text">Хорошая коммуникация, рекомендуем продавать здесь.</p>
-      <div class="meta">— Татьяна, 45 голды</div>
-    </div>
-  </article>
-
-  <article class="review">
-    <div class="avatar" aria-hidden="true"><span>Р</span></div>
-    <div class="review-body">
-      <p class="text">Очень профессионально — буду обращаться снова.</p>
-      <div class="meta">— Роман, 880 голды</div>
-    </div>
-  </article>
-
+  <div class="reviews-grid" id="reviewsGrid">
+    <!-- отзывы будут вставлены через JS -->
   </div>
-  <p style="text-align:center;margin-top:20px"><a href="index.html" class="btn outline">Назад на главную</a></p>
+
+  <p style="text-align:center;margin-top:30px;"><a href="index.html" class="btn outline">Назад на главную</a></p>
 </main>
 
 <script src="script.js"></script>
+<script>
+  (function() {
+    const reviewsGrid = document.getElementById('reviewsGrid');
+
+    // ========== БАЗА ОТЗЫВОВ С ИГРОВЫМИ НИКАМИ ==========
+    const reviews = [
+      {
+        nick: 'xX_SN1P3R_Xx',
+        amount: 15000,
+        date: 'сегодня, 14:23',
+        preview: 'Продал 15к голды, всё прошло супер быстро!',
+        message: 'Ребята, реально крутой сервис! Продал 15к голды, деньги пришли на карту через 2 минуты. Админ всё объяснил, показал как передать. Буду ещё продавать, когда накоплю. Всем советую, не бойтесь!',
+        adminReply: 'Спасибо за доверие! Рады, что всё прошло гладко. Ждём тебя снова 😉'
+      },
+      {
+        nick: 'KILLER_228',
+        amount: 25000,
+        date: 'сегодня, 12:05',
+        preview: '25к продал, админ красава!',
+        message: 'Очень доволен! Продал 25к голды, всё четко. Админ на связи всегда, отвечает моментально. Деньги пришли сразу. Раньше боялся скамеров, а тут реально всё честно. 10 из 10!',
+        adminReply: 'Благодарю за отзыв! Приятно работать с адекватными людьми. Обращайся ещё 🤝'
+      },
+      {
+        nick: 'Noob_Slayer_007',
+        amount: 8000,
+        date: 'вчера, 21:40',
+        preview: '8к продал, первый раз, всё ок',
+        message: 'В первый раз продавал голду, переживал что обманут. Но админ всё подробно объяснил, показал как передать. Деньги пришли на карту через 5 минут. Спасибо большое, теперь буду постоянным клиентом!',
+        adminReply: 'Рад, что первый опыт прошёл удачно! Всегда помогу и подскажу. Добро пожаловать в команду 🙌'
+      },
+      {
+        nick: 'CYBER_GHOST_23',
+        amount: 30000,
+        date: 'вчера, 18:15',
+        preview: '30к продал, ахуел от скорости!',
+        message: 'Бля, ребята, это просто пушка! 30к голды продал за 3 минуты. Деньги уже на карте. Админ реально топ, всё чётко, без лишних вопросов. Буду всем друзьям советовать!',
+        adminReply: 'Ого, 30к! Приятно работать с серьёзными людьми. Спасибо за доверие, ждём снова 💪'
+      },
+      {
+        nick: 'GHOUL_666',
+        amount: 12000,
+        date: 'вчера, 15:30',
+        preview: '12к продал, всё честно, респект',
+        message: 'Сначала сомневался, но всё оказалось честно. Продал 12к голды, деньги пришли. Админ вежливый, всё объяснил. Теперь буду знать куда обращаться. Всем рекомендую!',
+        adminReply: 'Спасибо за доверие! Всегда рад помочь. Обращайся, если будут вопросы 🤗'
+      },
+      {
+        nick: 'N1NJA_MASTER',
+        amount: 5000,
+        date: 'вчера, 12:00',
+        preview: '5к продал, быстро и удобно',
+        message: 'Продал 5к голды, даже не ожидал что так быстро. Админ ответил сразу, объяснил всё. Деньги на карте через пару минут. Отличный сервис, буду ещё продавать!',
+        adminReply: 'Спасибо! Даже небольшие суммы принимаем с удовольствием. Всегда рады 🤘'
+      },
+      {
+        nick: 'PWN3R_1337',
+        amount: 18000,
+        date: 'позавчера, 22:10',
+        preview: '18к продал, админ лучший!',
+        message: 'Реально лучший гарант в рунете! Продал 18к голды, всё прошло идеально. Деньги пришли моментально. Отдельное спасибо за терпение и объяснения для новичков. 100% рекомендую!',
+        adminReply: 'Спасибо за тёплые слова! Всегда рад помочь и объяснить. Ждём тебя снова 🌟'
+      },
+      {
+        nick: 'F1RE_ST0RM',
+        amount: 10000,
+        date: 'позавчера, 19:45',
+        preview: '10к продал, доволен как слон',
+        message: 'Продал 10к голды, всё четко. Деньги на карте через 2 минуты. Админ всегда на связи, отвечает быстро. Буду продавать ещё, когда накоплю. Спасибо за отличную работу!',
+        adminReply: 'Всегда пожалуйста! Работаем для вас. Обращайся ещё, будем на связи 🔥'
+      },
+      {
+        nick: 'V1RUS_47',
+        amount: 6000,
+        date: 'позавчера, 16:20',
+        preview: '6к продал, всё супер',
+        message: 'Очень доволен сервисом. Продал 6к голды, деньги пришли мгновенно. Админ вежливый, всё объяснил. Теперь только сюда буду обращаться. Всем советую!',
+        adminReply: 'Благодарю за отзыв! Приятно слышать хорошие слова. Всегда на связи 😎'
+      },
+      {
+        nick: 'D3M0N_HUNT3R',
+        amount: 22000,
+        date: 'позавчера, 13:50',
+        preview: '22к продал, кайф!',
+        message: 'Продал 22к голды, просто кайф! Админ ответил сразу, всё объяснил. Деньги на карте через 3 минуты. Ребята, это лучший сервис, который я видел. Всем советую, не пожалеете!',
+        adminReply: 'Кайфуем вместе с тобой! Спасибо за доверие, ждём новых сделок 🤝'
+      },
+      {
+        nick: 'SK1LLZ_99',
+        amount: 4000,
+        date: '2026-09-05, 23:10',
+        preview: '4к продал, первый раз, всё ок',
+        message: 'Первый раз продавал голду, боялся что обманут. Но админ всё разжевал, показал. Деньги пришли быстро. Спасибо большое, теперь буду постоянным клиентом!',
+        adminReply: 'Всегда рады новичкам! Главное — доверие и честность. Добро пожаловать 🙌'
+      },
+      {
+        nick: 'C4PT41N_US4',
+        amount: 14000,
+        date: '2026-09-05, 20:30',
+        preview: '14к продал, респект админу',
+        message: 'Продал 14к голды, всё прошло отлично. Админ вежливый, объяснил все детали. Деньги пришли на карту через минуту. Отличный сервис, буду ещё продавать!',
+        adminReply: 'Спасибо! Всегда рад помочь. Обращайся, будем на связи 💪'
+      },
+      {
+        nick: 'M4G1C_DR4G0N',
+        amount: 9000,
+        date: '2026-09-05, 17:15',
+        preview: '9к продал, доволен полностью',
+        message: 'Очень доволен сервисом. Продал 9к голды, деньги пришли мгновенно. Админ всегда на связи, отвечает быстро. Всем рекомендую этот сервис!',
+        adminReply: 'Спасибо за отзыв! Работаем для вас. Ждём снова 🔥'
+      },
+      {
+        nick: 'Z0MB1E_K1LL3R',
+        amount: 7500,
+        date: '2026-09-05, 14:00',
+        preview: '7.5к продал, всё чётко',
+        message: 'Продал 7.5к голды, всё прошло идеально. Админ объяснил всё, деньги на карте через пару минут. Буду рекомендовать друзьям. Спасибо за отличную работу!',
+        adminReply: 'Спасибо за доверие! Будем рады видеть тебя снова 🤘'
+      },
+      {
+        nick: 'N1GHTM4R3_666',
+        amount: 20000,
+        date: '2026-09-04, 22:00',
+        preview: '20к продал, ахуел от сервиса',
+        message: 'Бля, ребята, вы лучшие! 20к голды продал за 2 минуты. Деньги уже на карте. Админ ответил сразу, всё объяснил. Это лучший сервис в рунете! Всем советую!',
+        adminReply: 'Спасибо за мощный отзыв! Работаем для вас. Ждём новых сделок 💪'
+      },
+      {
+        nick: 'FURY_MASTER_01',
+        amount: 3000,
+        date: '2026-09-04, 19:30',
+        preview: '3к продал, быстро и честно',
+        message: 'Продал 3к голды, даже за такую маленькую сумму отнеслись серьёзно. Админ всё объяснил, деньги пришли. Буду копить и продавать больше. Спасибо!',
+        adminReply: 'Всегда серьёзно относимся к каждой сделке, независимо от суммы. Ждём тебя снова 🙏'
+      }
+    ];
+
+    // цвета для аватарок
+    const avatarColors = ['green', 'pink', 'blue', 'purple', 'orange', 'cyan', 'red', 'lime'];
+
+    // рендерим отзывы
+    reviews.forEach((review, index) => {
+      const card = document.createElement('div');
+      card.className = 'review-card';
+
+      const colorClass = avatarColors[index % avatarColors.length];
+
+      // звезды (рандомно 4-5)
+      const stars = Math.random() > 0.3 ? '★★★★★' : '★★★★☆';
+
+      card.innerHTML = `
+        <div class="review-header">
+          <div class="review-avatar ${colorClass}">${review.nick.charAt(0).toUpperCase()}</div>
+          <div>
+            <div class="review-nick">${review.nick}</div>
+            <div class="review-amount">💰 ${review.amount.toLocaleString()} голды</div>
+          </div>
+          <div class="review-date">${review.date}</div>
+        </div>
+        <div class="review-preview">
+          ${review.preview}
+          <span class="arrow">▼</span>
+        </div>
+        <div class="review-full">
+          <div class="review-stars">${stars}</div>
+          <div class="message">💬 ${review.message}</div>
+          <div class="admin-reply">
+            <div class="admin-label">👑 <span>Kruemen</span> — ответ админа:</div>
+            ${review.adminReply}
+          </div>
+        </div>
+      `;
+
+      // клик для раскрытия
+      card.addEventListener('click', function() {
+        const full = this.querySelector('.review-full');
+        const arrow = this.querySelector('.arrow');
+        const isOpen = full.classList.contains('open');
+
+        // закрываем все остальные
+        document.querySelectorAll('.review-full.open').forEach(el => {
+          if (el !== full) {
+            el.classList.remove('open');
+            el.closest('.review-card').querySelector('.arrow').classList.remove('open');
+          }
+        });
+
+        full.classList.toggle('open');
+        arrow.classList.toggle('open');
+
+        // скролл к отзыву если открыли
+        if (!isOpen) {
+          setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 200);
+        }
+      });
+
+      reviewsGrid.appendChild(card);
+    });
+
+  })();
+</script>
+
 </body>
 </html>
