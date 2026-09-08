@@ -2,17 +2,164 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Отзывы — Standoff2 Drop2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+  <!-- ===== SEO ===== -->
+  <title>Отзывы — Продажа голды Standoff 2 (Стандоф2) — Standoff2 Drop2</title>
+  <meta name="description" content="Реальные отзывы клиентов о продаже голды Standoff 2 (Стандоф2). Быстрый выкуп голды в стандофф2, честные цены, гарант сделок. Узнай, почему нам доверяют!" />
+  <meta name="keywords" content="отзывы standoff 2, отзывы стандоф2, продажа голды отзывы, скупка голды отзывы, гарант standoff 2, гарант стандоф, выкуп голды стандоф2 отзывы, продать голду стандофф2 отзывы" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://krimen3.github.io/standoof2-Drop/reviews.html" />
+
+  <!-- ===== OPEN GRAPH ===== -->
+  <meta property="og:title" content="Отзывы о продаже голды Standoff 2 (Стандоф2)" />
+  <meta property="og:description" content="Реальные отзывы клиентов о выкупе голды Standoff 2 / Стандоф2. Мгновенная оплата, честные курсы, гарант сделок." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://krimen3.github.io/standoof2-Drop/reviews.html" />
+  <meta property="og:image" content="https://krimen3.github.io/standoof2-Drop/favicon.svg" />
+  <meta property="og:site_name" content="Standoff2 Drop2" />
+
+  <!-- ===== TWITTER CARD ===== -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Отзывы о продаже голды Standoff 2 / Стандоф2" />
+  <meta name="twitter:description" content="Реальные отзывы клиентов о выкупе голды Standoff 2. Мгновенная оплата, честные курсы." />
+
+  <!-- ===== ЯНДЕКС МЕТРИКА ===== -->
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112378422', 'ym');
+
+    ym(112378422, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/112378422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
+
   <style>
-    /* стили для отзывов с раскрытием */
+    /* ===== КНОПКА НАШ КАНАЛ (СИНЯЯ) ===== */
+    .channel-btn {
+      background: linear-gradient(135deg, #1da1f2, #0a8cff) !important;
+      border: none !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+      padding: 8px 14px !important;
+      border-radius: 30px !important;
+      text-decoration: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      font-size: 14px !important;
+      transition: 0.2s !important;
+      box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3) !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      flex-shrink: 0 !important;
+    }
+    .channel-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(29, 161, 242, 0.5) !important;
+    }
+    .channel-btn:active {
+      transform: scale(0.95) !important;
+    }
+
+    /* ===== ТОПБАР ===== */
+    .topbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(10,10,16,0.95));
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      z-index: 60;
+      gap: 6px;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: transparent;
+      background: linear-gradient(90deg, #00FFFF, #FF00D9, #FFD700);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+    .nav-btn {
+      padding: 6px 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #cfcfcf;
+      border: 1px solid rgba(255,255,255,0.03);
+      transition: 0.18s;
+      font-size: 13px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: transparent;
+    }
+    .nav-btn:hover {
+      box-shadow: 0 8px 40px rgba(0,255,255,0.06);
+      transform: translateY(-2px);
+      color: #00FFFF;
+    }
+    .nav-btn:active {
+      transform: scale(0.95);
+    }
+
+    .content {
+      padding: 80px 12px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 32px;
+      background: linear-gradient(90deg, #00FFFF, #FF00D9, #FFD700);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: #999;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    /* ===== ОТЗЫВЫ ===== */
     .reviews-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-top: 18px;
+      margin-top: 10px;
     }
     .review-card {
       background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
@@ -56,21 +203,9 @@
     .review-avatar.red { background: linear-gradient(135deg, #ff4466, #cc0033); }
     .review-avatar.lime { background: linear-gradient(135deg, #aaff44, #66cc00); }
 
-    .review-nick {
-      font-weight: 700;
-      font-size: 16px;
-      color: #fff;
-    }
-    .review-amount {
-      font-size: 13px;
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .review-date {
-      font-size: 11px;
-      color: #666;
-      margin-left: auto;
-    }
+    .review-nick { font-weight: 700; font-size: 16px; color: #fff; }
+    .review-amount { font-size: 13px; color: #FFD700; font-weight: 600; }
+    .review-date { font-size: 11px; color: #666; margin-left: auto; }
     .review-preview {
       padding: 0 18px 12px 18px;
       color: #aaa;
@@ -83,11 +218,9 @@
       display: inline-block;
       transition: transform 0.3s;
       margin-left: 6px;
-      color: var(--neon-blue);
+      color: #00FFFF;
     }
-    .review-preview .arrow.open {
-      transform: rotate(180deg);
-    }
+    .review-preview .arrow.open { transform: rotate(180deg); }
     .review-full {
       max-height: 0;
       overflow: hidden;
@@ -104,7 +237,7 @@
       background: rgba(255,255,255,0.03);
       padding: 12px 16px;
       border-radius: 12px;
-      border-left: 3px solid var(--neon-blue);
+      border-left: 3px solid #00FFFF;
       color: #dcdcdc;
       font-size: 14px;
       line-height: 1.5;
@@ -114,12 +247,12 @@
       background: rgba(0,255,255,0.04);
       padding: 10px 16px;
       border-radius: 12px;
-      border-left: 3px solid var(--gold);
+      border-left: 3px solid #FFD700;
       color: #cfcfcf;
       font-size: 13px;
     }
     .review-full .admin-reply .admin-label {
-      color: var(--gold);
+      color: #FFD700;
       font-weight: 600;
       font-size: 12px;
       display: block;
@@ -128,25 +261,50 @@
     .review-full .admin-reply .admin-label span {
       background: linear-gradient(135deg, #ffd700, #ff8800);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 800;
     }
-    .review-stars {
-      color: var(--gold);
-      font-size: 14px;
-      letter-spacing: 2px;
-      margin-top: 4px;
+    .review-stars { color: #FFD700; font-size: 14px; letter-spacing: 2px; margin-top: 4px; }
+
+    .btn.outline {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.04);
+      text-decoration: none;
+      color: #ddd;
+      transition: 0.2s;
+      background: transparent;
+    }
+    .btn.outline:hover {
+      border-color: rgba(0,255,255,0.2);
+      color: #00FFFF;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 30px;
     }
 
     @media (max-width: 980px) {
-      .reviews-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
-      .reviews-grid {
-        grid-template-columns: 1fr;
-      }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .topbar { height: 54px; padding: 0 8px; gap: 4px; }
+      .logo { font-size: 13px; flex-shrink: 0; }
+      .nav { gap: 3px; }
+      .nav-btn { font-size: 11px; padding: 5px 8px; }
+      .channel-btn { font-size: 11px; padding: 5px 10px; gap: 4px; }
+      .content { padding: 70px 10px 30px; }
+      h1 { font-size: 22px; text-align: center; }
+    }
+    @media (max-width: 400px) {
+      .topbar { height: 48px; padding: 0 6px; }
+      .logo { font-size: 11px; }
+      .nav-btn { font-size: 10px; padding: 4px 6px; border-radius: 6px; }
+      .channel-btn { font-size: 10px; padding: 4px 8px; gap: 3px; }
+      h1 { font-size: 19px; }
     }
   </style>
 </head>
@@ -159,19 +317,19 @@
     <a href="reviews.html" class="nav-btn">Отзывы</a>
     <a href="faq.html" class="nav-btn">FAQ</a>
     <a href="https://t.me/kreunen" target="_blank" rel="noopener" class="channel-btn">📢 Наш канал</a>
-<a id="tgTopR" class="nav-btn" href="https://t.me/kreunen" target="_blank" rel="noopener">✉️ Админ</a>
+    <a id="tgTopR" class="nav-btn" href="https://t.me/kreunen" target="_blank" rel="noopener">✉️ Админ</a>
   </nav>
 </header>
 
 <main class="content">
-  <h1>⭐ Отзывы наших клиентов</h1>
-  <p style="color:#999;text-align:center;margin-bottom:10px;">Нажмите на отзыв, чтобы прочитать полное сообщение и ответ админа</p>
+  <h1>⭐ Отзывы клиентов о продаже голды Standoff 2</h1>
+  <p class="subtitle">Нажмите на отзыв, чтобы прочитать полное сообщение и ответ админа</p>
 
-  <div class="reviews-grid" id="reviewsGrid">
-    <!-- отзывы будут вставлены через JS -->
+  <div class="reviews-grid" id="reviewsGrid"></div>
+
+  <div class="back-link">
+    <a href="index.html" class="btn outline">← Назад на главную</a>
   </div>
-
-  <p style="text-align:center;margin-top:30px;"><a href="index.html" class="btn outline">Назад на главную</a></p>
 </main>
 
 <script src="script.js"></script>
@@ -179,149 +337,143 @@
   (function() {
     const reviewsGrid = document.getElementById('reviewsGrid');
 
-    // ========== БАЗА ОТЗЫВОВ С ИГРОВЫМИ НИКАМИ ==========
     const reviews = [
       {
         nick: 'xX_SN1P3R_Xx',
         amount: 15000,
         date: 'сегодня, 14:23',
-        preview: 'Продал 15к голды, всё прошло супер быстро!',
-        message: 'Ребята, реально крутой сервис! Продал 15к голды, деньги пришли на карту через 2 минуты. Админ всё объяснил, показал как передать. Буду ещё продавать, когда накоплю. Всем советую, не бойтесь!',
-        adminReply: 'Спасибо за доверие! Рады, что всё прошло гладко. Ждём тебя снова 😉'
+        preview: 'Продал 15к голды в Standoff 2, всё прошло супер быстро!',
+        message: 'Ребята, реально крутой сервис по продаже голды в Standoff 2! Продал 15к голды в стандоф2, деньги пришли на карту через 2 минуты. Админ всё объяснил, показал как передать. Буду ещё продавать голду в standoff 2, когда накоплю. Всем советую продавать голду в стандоф2, не бойтесь!',
+        adminReply: 'Спасибо за доверие в Standoff 2! Рады, что всё прошло гладко. Ждём тебя снова 😉'
       },
       {
         nick: 'KILLER_228',
         amount: 25000,
         date: 'сегодня, 12:05',
-        preview: '25к продал, админ красава!',
-        message: 'Очень доволен! Продал 25к голды, всё четко. Админ на связи всегда, отвечает моментально. Деньги пришли сразу. Раньше боялся скамеров, а тут реально всё честно. 10 из 10!',
-        adminReply: 'Благодарю за отзыв! Приятно работать с адекватными людьми. Обращайся ещё 🤝'
+        preview: '25к голды продал в стандоф2, админ красава!',
+        message: 'Очень доволен продажей голды в Standoff 2! Продал 25к голды в стандоф2, всё четко. Админ на связи всегда, отвечает моментально. Деньги пришли сразу за голду в standoff 2. Раньше боялся скамеров, а тут реально всё честно при продаже голды в стандоф2. 10 из 10!',
+        adminReply: 'Благодарю за отзыв о продаже голды в Standoff 2! Приятно работать с адекватными людьми. Обращайся ещё 🤝'
       },
       {
         nick: 'Noob_Slayer_007',
         amount: 8000,
         date: 'вчера, 21:40',
-        preview: '8к продал, первый раз, всё ок',
-        message: 'В первый раз продавал голду, переживал что обманут. Но админ всё подробно объяснил, показал как передать. Деньги пришли на карту через 5 минут. Спасибо большое, теперь буду постоянным клиентом!',
-        adminReply: 'Рад, что первый опыт прошёл удачно! Всегда помогу и подскажу. Добро пожаловать в команду 🙌'
+        preview: '8к голды продал в standoff 2, первый раз, всё ок',
+        message: 'В первый раз продавал голду в Standoff 2, переживал что обманут. Но админ по выкупу голды в стандоф2 всё подробно объяснил, показал как передать. Деньги за голду в standoff 2 пришли на карту через 5 минут. Спасибо большое за продажу голды в стандоф2, теперь буду постоянным клиентом!',
+        adminReply: 'Рад, что первый опыт продажи голды в Standoff 2 прошёл удачно! Всегда помогу и подскажу. Добро пожаловать в команду по скупке голды в стандоф2 🙌'
       },
       {
         nick: 'CYBER_GHOST_23',
         amount: 30000,
         date: 'вчера, 18:15',
-        preview: '30к продал, ахуел от скорости!',
-        message: 'Бля, ребята, это просто пушка! 30к голды продал за 3 минуты. Деньги уже на карте. Админ реально топ, всё чётко, без лишних вопросов. Буду всем друзьям советовать!',
-        adminReply: 'Ого, 30к! Приятно работать с серьёзными людьми. Спасибо за доверие, ждём снова 💪'
+        preview: '30к голды продал в стандоф2, ахуел от скорости!',
+        message: 'Бля, ребята, это просто пушка по продаже голды в Standoff 2! 30к голды в стандоф2 продал за 3 минуты. Деньги за голду в standoff 2 уже на карте. Админ реально топ, всё чётко, без лишних вопросов. Буду всем друзьям советовать продавать голду в стандоф2 здесь!',
+        adminReply: 'Ого, 30к голды в Standoff 2! Приятно работать с серьёзными людьми. Спасибо за доверие при продаже голды в стандоф2, ждём снова 💪'
       },
       {
         nick: 'GHOUL_666',
         amount: 12000,
         date: 'вчера, 15:30',
-        preview: '12к продал, всё честно, респект',
-        message: 'Сначала сомневался, но всё оказалось честно. Продал 12к голды, деньги пришли. Админ вежливый, всё объяснил. Теперь буду знать куда обращаться. Всем рекомендую!',
-        adminReply: 'Спасибо за доверие! Всегда рад помочь. Обращайся, если будут вопросы 🤗'
+        preview: '12к голды продал в standoff 2, всё честно, респект',
+        message: 'Сначала сомневался в продаже голды в Standoff 2, но всё оказалось честно. Продал 12к голды в стандоф2, деньги пришли. Админ вежливый, всё объяснил по выкупу голды в standoff 2. Теперь буду знать куда обращаться для продажи голды в стандоф2. Всем рекомендую!',
+        adminReply: 'Спасибо за доверие при продаже голды в Standoff 2! Всегда рад помочь. Обращайся, если будут вопросы 🤗'
       },
       {
         nick: 'N1NJA_MASTER',
         amount: 5000,
         date: 'вчера, 12:00',
-        preview: '5к продал, быстро и удобно',
-        message: 'Продал 5к голды, даже не ожидал что так быстро. Админ ответил сразу, объяснил всё. Деньги на карте через пару минут. Отличный сервис, буду ещё продавать!',
-        adminReply: 'Спасибо! Даже небольшие суммы принимаем с удовольствием. Всегда рады 🤘'
+        preview: '5к голды продал в стандоф2, быстро и удобно',
+        message: 'Продал 5к голды в Standoff 2, даже не ожидал что так быстро. Админ по выкупу голды в стандоф2 ответил сразу, объяснил всё. Деньги за голду в standoff 2 на карте через пару минут. Отличный сервис по продаже голды в стандоф2, буду ещё продавать!',
+        adminReply: 'Спасибо! Даже небольшие суммы голды в Standoff 2 принимаем с удовольствием. Всегда рады 🤘'
       },
       {
         nick: 'PWN3R_1337',
         amount: 18000,
         date: 'позавчера, 22:10',
-        preview: '18к продал, админ лучший!',
-        message: 'Реально лучший гарант в рунете! Продал 18к голды, всё прошло идеально. Деньги пришли моментально. Отдельное спасибо за терпение и объяснения для новичков. 100% рекомендую!',
-        adminReply: 'Спасибо за тёплые слова! Всегда рад помочь и объяснить. Ждём тебя снова 🌟'
+        preview: '18к голды продал в standoff 2, админ лучший!',
+        message: 'Реально лучший гарант по продаже голды в Standoff 2 в рунете! Продал 18к голды в стандоф2, всё прошло идеально. Деньги за голду в standoff 2 пришли моментально. Отдельное спасибо за терпение и объяснения для новичков по выкупу голды в стандоф2. 100% рекомендую продавать голду здесь!',
+        adminReply: 'Спасибо за тёплые слова о продаже голды в Standoff 2! Всегда рад помочь и объяснить. Ждём тебя снова 🌟'
       },
       {
         nick: 'F1RE_ST0RM',
         amount: 10000,
         date: 'позавчера, 19:45',
-        preview: '10к продал, доволен как слон',
-        message: 'Продал 10к голды, всё четко. Деньги на карте через 2 минуты. Админ всегда на связи, отвечает быстро. Буду продавать ещё, когда накоплю. Спасибо за отличную работу!',
-        adminReply: 'Всегда пожалуйста! Работаем для вас. Обращайся ещё, будем на связи 🔥'
+        preview: '10к голды продал в стандоф2, доволен как слон',
+        message: 'Продал 10к голды в Standoff 2, всё четко. Деньги за голду в стандоф2 на карте через 2 минуты. Админ всегда на связи по продаже голды в standoff 2, отвечает быстро. Буду продавать ещё голду в стандоф2, когда накоплю. Спасибо за отличную работу по выкупу голды!',
+        adminReply: 'Всегда пожалуйста! Работаем для вас по продаже голды в Standoff 2. Обращайся ещё, будем на связи 🔥'
       },
       {
         nick: 'V1RUS_47',
         amount: 6000,
         date: 'позавчера, 16:20',
-        preview: '6к продал, всё супер',
-        message: 'Очень доволен сервисом. Продал 6к голды, деньги пришли мгновенно. Админ вежливый, всё объяснил. Теперь только сюда буду обращаться. Всем советую!',
-        adminReply: 'Благодарю за отзыв! Приятно слышать хорошие слова. Всегда на связи 😎'
+        preview: '6к голды продал в standoff 2, всё супер',
+        message: 'Очень доволен сервисом по продаже голды в Standoff 2. Продал 6к голды в стандоф2, деньги пришли мгновенно. Админ вежливый, всё объяснил по выкупу голды в standoff 2. Теперь только сюда буду обращаться для продажи голды в стандоф2. Всем советую!',
+        adminReply: 'Благодарю за отзыв о продаже голды в Standoff 2! Приятно слышать хорошие слова. Всегда на связи 😎'
       },
       {
         nick: 'D3M0N_HUNT3R',
         amount: 22000,
         date: 'позавчера, 13:50',
-        preview: '22к продал, кайф!',
-        message: 'Продал 22к голды, просто кайф! Админ ответил сразу, всё объяснил. Деньги на карте через 3 минуты. Ребята, это лучший сервис, который я видел. Всем советую, не пожалеете!',
-        adminReply: 'Кайфуем вместе с тобой! Спасибо за доверие, ждём новых сделок 🤝'
+        preview: '22к голды продал в стандоф2, кайф!',
+        message: 'Продал 22к голды в Standoff 2, просто кайф! Админ по выкупу голды в стандоф2 ответил сразу, всё объяснил. Деньги за голду в standoff 2 на карте через 3 минуты. Ребята, это лучший сервис по продаже голды в стандоф2, который я видел. Всем советую продавать голду здесь, не пожалеете!',
+        adminReply: 'Кайфуем вместе с тобой от продажи голды в Standoff 2! Спасибо за доверие, ждём новых сделок 🤝'
       },
       {
         nick: 'SK1LLZ_99',
         amount: 4000,
         date: '2026-09-05, 23:10',
-        preview: '4к продал, первый раз, всё ок',
-        message: 'Первый раз продавал голду, боялся что обманут. Но админ всё разжевал, показал. Деньги пришли быстро. Спасибо большое, теперь буду постоянным клиентом!',
-        adminReply: 'Всегда рады новичкам! Главное — доверие и честность. Добро пожаловать 🙌'
+        preview: '4к голды продал в standoff 2, первый раз, всё ок',
+        message: 'Первый раз продавал голду в Standoff 2, боялся что обманут. Но админ по выкупу голды в стандоф2 всё разжевал, показал. Деньги за голду в standoff 2 пришли быстро. Спасибо большое за продажу голды в стандоф2, теперь буду постоянным клиентом!',
+        adminReply: 'Всегда рады новичкам по продаже голды в Standoff 2! Главное — доверие и честность. Добро пожаловать 🙌'
       },
       {
         nick: 'C4PT41N_US4',
         amount: 14000,
         date: '2026-09-05, 20:30',
-        preview: '14к продал, респект админу',
-        message: 'Продал 14к голды, всё прошло отлично. Админ вежливый, объяснил все детали. Деньги пришли на карту через минуту. Отличный сервис, буду ещё продавать!',
-        adminReply: 'Спасибо! Всегда рад помочь. Обращайся, будем на связи 💪'
+        preview: '14к голды продал в стандоф2, респект админу',
+        message: 'Продал 14к голды в Standoff 2, всё прошло отлично. Админ вежливый, объяснил все детали по выкупу голды в стандоф2. Деньги за голду в standoff 2 пришли на карту через минуту. Отличный сервис по продаже голды в стандоф2, буду ещё продавать!',
+        adminReply: 'Спасибо! Всегда рад помочь с продажей голды в Standoff 2. Обращайся, будем на связи 💪'
       },
       {
         nick: 'M4G1C_DR4G0N',
         amount: 9000,
         date: '2026-09-05, 17:15',
-        preview: '9к продал, доволен полностью',
-        message: 'Очень доволен сервисом. Продал 9к голды, деньги пришли мгновенно. Админ всегда на связи, отвечает быстро. Всем рекомендую этот сервис!',
-        adminReply: 'Спасибо за отзыв! Работаем для вас. Ждём снова 🔥'
+        preview: '9к голды продал в standoff 2, доволен полностью',
+        message: 'Очень доволен сервисом по продаже голды в Standoff 2. Продал 9к голды в стандоф2, деньги пришли мгновенно. Админ всегда на связи по выкупу голды в standoff 2, отвечает быстро. Всем рекомендую этот сервис для продажи голды в стандоф2!',
+        adminReply: 'Спасибо за отзыв о продаже голды в Standoff 2! Работаем для вас. Ждём снова 🔥'
       },
       {
         nick: 'Z0MB1E_K1LL3R',
         amount: 7500,
         date: '2026-09-05, 14:00',
-        preview: '7.5к продал, всё чётко',
-        message: 'Продал 7.5к голды, всё прошло идеально. Админ объяснил всё, деньги на карте через пару минут. Буду рекомендовать друзьям. Спасибо за отличную работу!',
-        adminReply: 'Спасибо за доверие! Будем рады видеть тебя снова 🤘'
+        preview: '7.5к голды продал в стандоф2, всё чётко',
+        message: 'Продал 7.5к голды в Standoff 2, всё прошло идеально. Админ по выкупу голды в стандоф2 объяснил всё, деньги за голду в standoff 2 на карте через пару минут. Буду рекомендовать друзьям продавать голду в стандоф2 здесь. Спасибо за отличную работу!',
+        adminReply: 'Спасибо за доверие при продаже голды в Standoff 2! Будем рады видеть тебя снова 🤘'
       },
       {
         nick: 'N1GHTM4R3_666',
         amount: 20000,
         date: '2026-09-04, 22:00',
-        preview: '20к продал, ахуел от сервиса',
-        message: 'Бля, ребята, вы лучшие! 20к голды продал за 2 минуты. Деньги уже на карте. Админ ответил сразу, всё объяснил. Это лучший сервис в рунете! Всем советую!',
-        adminReply: 'Спасибо за мощный отзыв! Работаем для вас. Ждём новых сделок 💪'
+        preview: '20к голды продал в standoff 2, ахуел от сервиса',
+        message: 'Бля, ребята, вы лучшие по продаже голды в Standoff 2! 20к голды в стандоф2 продал за 2 минуты. Деньги за голду в standoff 2 уже на карте. Админ ответил сразу, всё объяснил по выкупу голды в стандоф2. Это лучший сервис в рунете для продажи голды! Всем советую продавать голду в стандоф2 здесь!',
+        adminReply: 'Спасибо за мощный отзыв о продаже голды в Standoff 2! Работаем для вас. Ждём новых сделок 💪'
       },
       {
         nick: 'FURY_MASTER_01',
         amount: 3000,
         date: '2026-09-04, 19:30',
-        preview: '3к продал, быстро и честно',
-        message: 'Продал 3к голды, даже за такую маленькую сумму отнеслись серьёзно. Админ всё объяснил, деньги пришли. Буду копить и продавать больше. Спасибо!',
-        adminReply: 'Всегда серьёзно относимся к каждой сделке, независимо от суммы. Ждём тебя снова 🙏'
+        preview: '3к голды продал в стандоф2, быстро и честно',
+        message: 'Продал 3к голды в Standoff 2, даже за такую маленькую сумму голды в стандоф2 отнеслись серьёзно. Админ по выкупу голды в standoff 2 всё объяснил, деньги за голду пришли. Буду копить голду в стандоф2 и продавать больше. Спасибо!',
+        adminReply: 'Всегда серьёзно относимся к каждой сделке по продаже голды в Standoff 2, независимо от суммы. Ждём тебя снова 🙏'
       }
     ];
 
-    // цвета для аватарок
     const avatarColors = ['green', 'pink', 'blue', 'purple', 'orange', 'cyan', 'red', 'lime'];
 
-    // рендерим отзывы
     reviews.forEach((review, index) => {
       const card = document.createElement('div');
       card.className = 'review-card';
-
       const colorClass = avatarColors[index % avatarColors.length];
-
-      // звезды (рандомно 4-5)
       const stars = Math.random() > 0.3 ? '★★★★★' : '★★★★☆';
 
       card.innerHTML = `
@@ -347,13 +499,11 @@
         </div>
       `;
 
-      // клик для раскрытия
       card.addEventListener('click', function() {
         const full = this.querySelector('.review-full');
         const arrow = this.querySelector('.arrow');
         const isOpen = full.classList.contains('open');
 
-        // закрываем все остальные
         document.querySelectorAll('.review-full.open').forEach(el => {
           if (el !== full) {
             el.classList.remove('open');
@@ -364,7 +514,6 @@
         full.classList.toggle('open');
         arrow.classList.toggle('open');
 
-        // скролл к отзыву если открыли
         if (!isOpen) {
           setTimeout(() => {
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -375,6 +524,15 @@
       reviewsGrid.appendChild(card);
     });
 
+    // ===== ТЕЛЕФОН: КНОПКА АДМИН =====
+    const tgTopR = document.getElementById('tgTopR');
+    if (tgTopR) {
+      tgTopR.addEventListener('click', function(e) {
+        e.preventDefault();
+        try { window.location = 'tg://resolve?domain=kreunen'; } catch(e) {}
+        setTimeout(function() { window.open('https://t.me/kreunen', '_blank'); }, 700);
+      });
+    }
   })();
 </script>
 
