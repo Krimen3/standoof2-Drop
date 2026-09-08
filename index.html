@@ -4,28 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-  <!-- ===== SEO РАСШИРЕННЫЙ ===== -->
+  <!-- ===== SEO ===== -->
   <title>Standoff2 Drop2 — Продай голду Standoff 2 | Стандоф2 скупка голды</title>
-  
   <meta name="description" content="Продай голду Standoff 2 (Стандоф2) по выгодному курсу. Мгновенная скупка голды в стандофф2, деньги на карту за 3 минуты. От 10к голды курс 1.7 ₽. Гарант при продаже аккаунтов Standoff 2." />
-  
   <meta name="keywords" content="продать голду standoff 2, продать голду стандоф2, скупка голды standoff, скупка голды стандоф, выкуп голды standoff 2, выкуп голды стандофф2, продажа голды стандоф 2, голда standoff 2 продать, голда стандоф2 продать, курс голды standoff 2, курс голды стандоф, гарант standoff 2, гарант стандоф, продать голду стандофф2, продать голду стандф, стандоф2 голда, стандофф2 голда, standoff2 голда, выкуп голды стандоф2, скупка голды стандофф2" />
-  
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://tvoi-sait.ru/index.html" />
+  <link rel="canonical" href="https://krimen3.github.io/standoof2-Drop/index.html" />
 
   <!-- ===== OPEN GRAPH ===== -->
   <meta property="og:title" content="Standoff2 Drop2 — Продай голду Standoff 2 (Стандоф2)" />
   <meta property="og:description" content="Мгновенная скупка голды Standoff 2 / Стандоф2. Курс до 10к = 1.2 ₽, от 10к = 1.7 ₽. Деньги на карту за 3 минуты. Гарант при продаже аккаунтов." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tvoi-sait.ru/" />
-  <meta property="og:image" content="https://tvoi-sait.ru/favicon.svg" />
+  <meta property="og:url" content="https://krimen3.github.io/standoof2-Drop/" />
+  <meta property="og:image" content="https://krimen3.github.io/standoof2-Drop/favicon.svg" />
   <meta property="og:site_name" content="Standoff2 Drop2" />
 
   <!-- ===== TWITTER CARD ===== -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Standoff2 Drop2 — Продай голду Standoff 2 / Стандоф2" />
   <meta name="twitter:description" content="Мгновенная скупка голды Standoff 2. Курс от 1.2 ₽, от 10к — 1.7 ₽. Деньги на карту за 3 минуты." />
+
+  <!-- ===== ЯНДЕКС МЕТРИКА ===== -->
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112378422', 'ym');
+
+    ym(112378422, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/112378422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
@@ -777,6 +789,25 @@
 <script src="script.js"></script>
 <script>
   (function() {
+    // ===== ПРИНУДИТЕЛЬНАЯ ЗАМЕНА @avert2 НА @kreunen =====
+    try {
+      const stored = localStorage.getItem('st2_chat_messages_v2');
+      if (stored) {
+        let parsed = JSON.parse(stored);
+        let changed = false;
+        parsed = parsed.map(msg => {
+          if (msg.text && msg.text.includes('@avert2')) {
+            msg.text = msg.text.replace(/@avert2/g, '@kreunen');
+            changed = true;
+          }
+          return msg;
+        });
+        if (changed) {
+          localStorage.setItem('st2_chat_messages_v2', JSON.stringify(parsed));
+        }
+      }
+    } catch (e) {}
+
     // ===== КЛЮЧ ДЛЯ ХРАНЕНИЯ =====
     const CHAT_STORAGE_KEY = 'st2_chat_messages_v2';
     const MAX_STORED_MSGS = 300;
