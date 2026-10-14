@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Продать Gold Standoff 2 — STANDOFF GOLD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --panel-bg: #12141d;
+      --card-bg: rgba(23, 26, 38, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-red: #ff334b;
+      --accent-orange: #ff6b2b;
+      --accent-green: #10b981;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sidebar-width: 280px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; overflow-x: hidden; }
+    .app-container { display: flex; width: 100%; min-height: 100vh; }
+
+    .menu-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 99; }
+    .menu-overlay.active { display: block; }
+
+    .sidebar { width: var(--sidebar-width); background-color: var(--panel-bg); border-right: 1px solid var(--card-border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: transform 0.3s ease; }
+    .sidebar-header { padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .brand-logo { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-red), var(--accent-orange)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+
+    .sidebar-nav { padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .nav-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 12px; color: var(--text-muted); text-decoration: none; font-weight: 600; }
+    .nav-item.active { background: rgba(255, 51, 75, 0.12); color: #fff; border-left: 3px solid var(--accent-red); }
+
+    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 32px; max-width: 1200px; width: 100%; }
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--panel-bg); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 90; }
+    .menu-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: #fff; padding: 10px; border-radius: 10px; cursor: pointer; }
+
+    .page-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; backdrop-filter: blur(10px); margin-bottom: 20px; }
+    .card-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; }
+
+    /* Mobile Friendly Grid */
+    .presets-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+    .preset-card { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 8px; cursor: pointer; text-align: center; position: relative; overflow: hidden; }
+    .preset-card.active { border-color: var(--accent-green); background: rgba(16, 185, 129, 0.12); }
+    
+    .preset-badge { position: absolute; top: 0; right: 0; background: var(--accent-green); color: #000; font-size: 0.6rem; font-weight: 800; padding: 2px 5px; border-bottom-left-radius: 6px; }
+    .preset-badge.max-badge { background: linear-gradient(135deg, #ff334b, #ff6b2b); color: #fff; }
+    .preset-amount { font-size: 1rem; font-weight: 700; color: #fff; }
+    .preset-rate { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+    .preset-payout { font-size: 0.82rem; font-weight: 700; color: var(--accent-green); margin-top: 3px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+    .form-input { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px 16px; color: #fff; font-size: 1.1rem; font-weight: 600; outline: none; }
+    .input-wrapper { position: relative; }
+    .input-badge { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--accent-orange); }
+
+    /* Bank Grid */
+    .bank-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+    .bank-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: 10px; padding: 8px 4px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
+    .bank-item.active { border-color: var(--accent-red); background: rgba(255, 51, 75, 0.12); }
+    .bank-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .bank-name { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); }
+
+    .trade-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .summary-box { background: rgba(0, 0, 0, 0.3); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
+    .summary-row:last-child { margin-bottom: 0; padding-top: 10px; border-top: 1px solid var(--card-border); font-weight: 700; font-size: 1.1rem; color: #fff; }
+
+    .btn { padding: 16px; border-radius: 12px; font-weight: 800; font-size: 1rem; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; width: 100%; text-decoration: none; }
+    .btn-glow-green { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+
+    @media (max-width: 850px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; padding: 18px 16px; }
+      .mobile-header { display: flex; }
+      .trade-container { grid-template-columns: 1fr; gap: 14px; }
+      .page-title { font-size: 1.5rem; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon"><svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+          <span>STANDOFF GOLD</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Главная</a>
+        <a href="buy.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Купить</a>
+        <a href="sell.html" class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Продать</a>
+        <a href="reviews.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>Отзывы</a>
+        <a href="faq.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>FAQ</a>
+        <a href="contacts.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Контакты</a>
+      </nav>
+    </aside>
+
+    <div style="flex:1; display:flex; flex-direction:column;">
+      <header class="mobile-header">
+        <a href="index.html" class="brand-logo" style="font-size: 1.1rem;">
+          <div class="brand-icon" style="width:28px; height:28px;"><svg viewBox="0 0 24 24" style="width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+          <span>STANDOFF GOLD</span>
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </header>
+
+      <main class="main-content">
+        <h1 class="page-title">Продать Gold Standoff 2</h1>
+
+        <div class="card">
+          <div class="card-title">Пакеты скупщика</div>
+          <div class="presets-grid">
+            <div class="preset-card" onclick="setSell(1000, this)">
+              <div class="preset-amount">1,000 G</div>
+              <div class="preset-rate">0.6 ₽ / G</div>
+              <div class="preset-payout">600 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(2000, this)">
+              <div class="preset-badge">+17%</div>
+              <div class="preset-amount">2,000 G</div>
+              <div class="preset-rate">0.7 ₽ / G</div>
+              <div class="preset-payout">1,400 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(3000, this)">
+              <div class="preset-badge">+25%</div>
+              <div class="preset-amount">3,000 G</div>
+              <div class="preset-rate">0.75 ₽ / G</div>
+              <div class="preset-payout">2,250 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(4000, this)">
+              <div class="preset-badge">+30%</div>
+              <div class="preset-amount">4,000 G</div>
+              <div class="preset-rate">0.78 ₽ / G</div>
+              <div class="preset-payout">3,120 ₽</div>
+            </div>
+            <div class="preset-card active" onclick="setSell(5000, this)">
+              <div class="preset-badge">+33%</div>
+              <div class="preset-amount">5,000 G</div>
+              <div class="preset-rate">0.8 ₽ / G</div>
+              <div class="preset-payout">4,000 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(10000, this)">
+              <div class="preset-badge">+67%</div>
+              <div class="preset-amount">10,000 G</div>
+              <div class="preset-rate">1.0 ₽ / G</div>
+              <div class="preset-payout">10,000 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(20000, this)">
+              <div class="preset-badge">+150%</div>
+              <div class="preset-amount">20,000 G</div>
+              <div class="preset-rate">1.5 ₽ / G</div>
+              <div class="preset-payout">30,000 ₽</div>
+            </div>
+            <div class="preset-card" onclick="setSell(50000, this)">
+              <div class="preset-badge max-badge">МАКС</div>
+              <div class="preset-amount">50,000 G</div>
+              <div class="preset-rate">2.0 ₽ / G</div>
+              <div class="preset-payout">100,000 ₽</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trade-container">
+          <div class="card">
+            <div class="card-title">Реквизиты получения денег</div>
+            
+            <div class="form-group">
+              <label class="form-label">Количество Gold</label>
+              <div class="input-wrapper">
+                <input type="number" id="sell-amount" class="form-input" value="5000" min="1000" oninput="calculateSell()">
+                <span class="input-badge">G</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Номер телефона / Карты</label>
+              <input type="text" id="sell-phone" class="form-input" placeholder="+7 (999) 000-00-00">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Выберите Банк</label>
+              <div class="bank-grid">
+                <div class="bank-item active" onclick="selectBank(this, 'Озон Банк')">
+                  <div class="bank-icon" style="background:#005BFF;"><span style="color:#fff; font-weight:800; font-size:9px;">OZON</span></div>
+                  <span class="bank-name">Озон</span>
+                </div>
+                <div class="bank-item" onclick="selectBank(this, 'Сбербанк')">
+                  <div class="bank-icon" style="background:#21A038;"><span style="color:#fff; font-weight:800; font-size:9px;">СБЕР</span></div>
+                  <span class="bank-name">Сбер</span>
+                </div>
+                <div class="bank-item" onclick="selectBank(this, 'Т-Банк')">
+                  <div class="bank-icon" style="background:#FFDD2D;"><span style="color:#000; font-weight:900; font-size:12px;">Т</span></div>
+                  <span class="bank-name">Т-Банк</span>
+                </div>
+                <div class="bank-item" onclick="selectBank(this, 'СБП')">
+                  <div class="bank-icon" style="background:#000; border: 1px solid var(--card-border);"><span style="color:#10b981; font-weight:800; font-size:9px;">СБП</span></div>
+                  <span class="bank-name">СБП</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Итог выплаты</div>
+            <div class="summary-box">
+              <div class="summary-row"><span>Курс продажи:</span><span id="sell-rate-display">0.80 ₽ / G</span></div>
+              <div class="summary-row"><span>Способ выплаты:</span><span id="selected-bank-display" style="color:#fff;">Озон Банк</span></div>
+              <div class="summary-row"><span>Вы получите:</span><span id="sell-total" style="color: var(--accent-green);">4,000 ₽</span></div>
+            </div>
+
+            <button class="btn btn-glow-green" onclick="sendSellOrder()">Отправить заявку в Telegram</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    let selectedBank = 'Озон Банк';
+
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+
+    function getRate(a) {
+      if (a >= 50000) return 2.0;
+      if (a >= 20000) return 1.5;
+      if (a >= 10000) return 1.0;
+      if (a >= 5000) return 0.8;
+      if (a >= 4000) return 0.78;
+      if (a >= 3000) return 0.75;
+      if (a >= 2000) return 0.7;
+      return 0.6;
+    }
+
+    function setSell(val, el) {
+      document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+      if (el) el.classList.add('active');
+      document.getElementById('sell-amount').value = val;
+      calculateSell();
+    }
+
+    function calculateSell() {
+      const amount = parseFloat(document.getElementById('sell-amount').value) || 0;
+      const rate = getRate(amount);
+      document.getElementById('sell-rate-display').innerText = rate.toFixed(2) + ' ₽ / G';
+      document.getElementById('sell-total').innerText = (amount * rate).toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function selectBank(el, name) {
+      document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      selectedBank = name;
+      document.getElementById('selected-bank-display').innerText = name;
+    }
+
+    function sendSellOrder() {
+      const amount = document.getElementById('sell-amount').value || '5000';
+      const phone = document.getElementById('sell-phone').value || 'Не указан';
+      const rate = getRate(amount);
+      const total = (amount * rate).toLocaleString('ru-RU');
+
+      const text = `Здравствуйте! Хочу продать ${amount} Gold Standoff 2.\n- Выплата: ${total} ₽\n- Способ: ${selectedBank}\n- Телефон/Реквизиты: ${phone}`;
+      window.open(`https://t.me/Kreunen?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    calculateSell();
+  </script>
+</body>
+</html>

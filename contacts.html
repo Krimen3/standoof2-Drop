@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Контакты и Реквизиты — STANDOFF GOLD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0b10;
+      --panel-bg: #12141d;
+      --card-bg: rgba(23, 26, 38, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-red: #ff334b;
+      --accent-orange: #ff6b2b;
+      --accent-green: #10b981;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sidebar-width: 280px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; overflow-x: hidden; }
+    .app-container { display: flex; width: 100%; min-height: 100vh; }
+
+    .menu-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 99; }
+    .menu-overlay.active { display: block; }
+
+    .sidebar { width: var(--sidebar-width); background-color: var(--panel-bg); border-right: 1px solid var(--card-border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: transform 0.3s ease; }
+    .sidebar-header { padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .brand-logo { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-red), var(--accent-orange)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+
+    .sidebar-nav { padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .nav-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 12px; color: var(--text-muted); text-decoration: none; font-weight: 600; }
+    .nav-item.active { background: rgba(255, 51, 75, 0.12); color: #fff; border-left: 3px solid var(--accent-red); }
+
+    .sidebar-tg-links { padding: 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; gap: 8px; }
+    .tg-nav-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; text-decoration: none; color: #fff;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3)); border: 1px solid rgba(16, 185, 129, 0.5); transition: all 0.2s ease;
+    }
+
+    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 32px; max-width: 1200px; width: 100%; }
+    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--panel-bg); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 90; }
+    .menu-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: #fff; padding: 10px; border-radius: 10px; cursor: pointer; }
+
+    .page-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; backdrop-filter: blur(10px); margin-bottom: 24px; }
+    .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+
+    /* Contacts Grid Layout */
+    .contacts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .contact-item { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--card-border); padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .contact-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .contact-val { font-size: 1.1rem; font-weight: 700; color: #fff; text-decoration: none; word-break: break-all; }
+    .contact-val-highlight { color: var(--accent-orange); }
+
+    /* Requisites Grid Layout */
+    .req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .req-item { background: rgba(0, 0, 0, 0.2); border: 1px solid var(--card-border); padding: 16px; border-radius: 14px; }
+    .req-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .req-val { font-size: 0.98rem; font-weight: 700; color: #fff; }
+
+    .btn { padding: 16px 28px; border-radius: 14px; font-weight: 800; font-size: 1rem; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; width: 100%; }
+    .btn-glow-red { background: linear-gradient(135deg, #ff334b, #ff6b2b); color: #fff; box-shadow: 0 0 20px rgba(255, 51, 75, 0.5); }
+
+    @media (max-width: 850px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .main-content { margin-left: 0; padding: 18px 16px; }
+      .mobile-header { display: flex; }
+      .page-title { font-size: 1.5rem; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon"><svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+          <span>STANDOFF GOLD</span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Главная</a>
+        <a href="buy.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Купить</a>
+        <a href="sell.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Продать</a>
+        <a href="reviews.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>Отзывы</a>
+        <a href="faq.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>FAQ</a>
+        <a href="contacts.html" class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Контакты</a>
+      </nav>
+
+      <div class="sidebar-tg-links">
+        <a href="https://t.me/STANDOFF_GOLDEX" target="_blank" class="tg-nav-btn">📢 Наш Канал</a>
+        <a href="https://t.me/STANDOFF_GOLDEZ" target="_blank" class="tg-nav-btn">⭐ Отзывы</a>
+      </div>
+    </aside>
+
+    <div style="flex:1; display:flex; flex-direction:column;">
+      <header class="mobile-header">
+        <a href="index.html" class="brand-logo" style="font-size: 1.1rem;">
+          <div class="brand-icon" style="width:28px; height:28px;"><svg viewBox="0 0 24 24" style="width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+          <span>STANDOFF GOLD</span>
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </header>
+
+      <main class="main-content">
+        <h1 class="page-title">Контакты и Поддержка</h1>
+
+        <div class="card">
+          <div class="card-title">Связаться с нами</div>
+          <div class="contacts-grid">
+            <div class="contact-item">
+              <span class="contact-label">Менеджер по сделкам</span>
+              <a href="https://t.me/Kreunen" target="_blank" class="contact-val contact-val-highlight">@Kreunen в Telegram</a>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Время работы: 24/7 (Без выходных)</span>
+            </div>
+
+            <div class="contact-item">
+<span style="font-size: 0.8rem; color: var(--text-muted);">Автоматическое зачисление голды</span>
+            </div>
+          </div>
+
+          <a href="https://t.me/Kreunen" target="_blank" class="btn btn-glow-red">Написать менеджеру в Telegram</a>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Юридическая информация</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">
+            STANDOFF GOLD является независимым торговым сервисом. Мы гарантируем безопасность всех проводимых выплат и строгое соблюдение регламента обработки платежей.
+          </p>
+
+          <div class="req-grid">
+            <div class="req-item">
+              <div class="req-label">Наименование</div>
+              <div class="req-val">ИП Волков Артём Игоревич</div>
+            </div>
+
+            <div class="req-item">
+              <div class="req-label">ИНН</div>
+              <div class="req-val">783912740600</div>
+            </div>
+
+            <div class="req-item">
+              <div class="req-label">ОГРНИП</div>
+              <div class="req-val">321784760031521</div>
+            </div>
+
+            <div class="req-item">
+              <div class="req-label">Город регистраций</div>
+              <div class="req-val">г. Москва</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
