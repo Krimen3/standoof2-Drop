@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://krimen3.github.io/standoof2-Drop/sitemap.xml
+Sitemap: https://standoffgoldez.ru/sitemap.xml
