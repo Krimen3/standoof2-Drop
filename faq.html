@@ -1,12 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>FAQ — STANDOFF GOLD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FAQ — вопросы и ответы об обмене Gold | STANDOFF GOLD</title>
+  <meta name="description" content="Ответы на частые вопросы об обмене Gold в Standoff 2: порядок покупки и продажи, способы связи, оплата и безопасность сделок.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://standoffgoldez.ru/faq">
+  <meta name="theme-color" content="#0a0b10">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
   <style>
     :root {
       --bg-dark: #0a0b10;
@@ -21,154 +32,783 @@
       --sidebar-width: 280px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; user-select: none; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; overflow-x: hidden; }
-    .app-container { display: flex; width: 100%; min-height: 100vh; }
-
-    .menu-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); z-index: 99; }
-    .menu-overlay.active { display: block; }
-
-    .sidebar { width: var(--sidebar-width); background-color: var(--panel-bg); border-right: 1px solid var(--card-border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: transform 0.3s ease; }
-    .sidebar-header { padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-    .brand-logo { display: flex; align-items: center; gap: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; text-decoration: none; }
-    .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent-red), var(--accent-orange)); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-
-    .sidebar-nav { padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .nav-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 12px; color: var(--text-muted); text-decoration: none; font-weight: 600; }
-    .nav-item.active { background: rgba(255, 51, 75, 0.12); color: #fff; border-left: 3px solid var(--accent-red); }
-
-    .sidebar-tg-links { padding: 16px 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; gap: 8px; }
-    .tg-nav-btn {
-      display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.85rem; text-decoration: none; color: #fff;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3)); border: 1px solid rgba(16, 185, 129, 0.5); transition: all 0.2s ease;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 32px; max-width: 1200px; width: 100%; }
-    .mobile-header { display: none; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--panel-bg); border-bottom: 1px solid var(--card-border); position: sticky; top: 0; z-index: 90; }
-    .menu-toggle { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: #fff; padding: 10px; border-radius: 10px; cursor: pointer; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    .page-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-    /* FAQ Accordion Styling */
-    .faq-accordion { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
-    .faq-item { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: all 0.25s ease; backdrop-filter: blur(10px); }
-    .faq-header { padding: 18px 20px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; color: #fff; gap: 12px; }
-    .faq-header:hover { background: rgba(255, 255, 255, 0.04); }
-    .faq-icon { transition: transform 0.3s ease; color: var(--accent-orange); font-size: 0.85rem; flex-shrink: 0; }
-    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease; padding: 0 20px; color: var(--text-muted); line-height: 1.55; font-size: 0.92rem; }
-    .faq-item.active { border-color: rgba(255, 107, 43, 0.4); background: rgba(23, 26, 38, 0.95); }
-    .faq-item.active .faq-icon { transform: rotate(180deg); }
-    .faq-item.active .faq-content { max-height: 500px; padding: 0 20px 18px 20px; }
+    a {
+      color: inherit;
+    }
 
-    .btn { padding: 16px 28px; border-radius: 14px; font-weight: 800; font-size: 1rem; cursor: pointer; border: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; width: 100%; }
-    .btn-glow-red { background: linear-gradient(135deg, #ff334b, #ff6b2b); color: #fff; box-shadow: 0 0 20px rgba(255, 51, 75, 0.5); }
+    button {
+      font: inherit;
+    }
+
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 99;
+    }
+
+    .menu-overlay.active {
+      display: block;
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.5;
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-item svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 51, 75, 0.12);
+      color: #fff;
+      border-left: 3px solid var(--accent-red);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--accent-red);
+    }
+
+    .sidebar-tg-links {
+      padding: 16px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tg-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.3));
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      transition: background 0.2s ease;
+    }
+
+    .tg-nav-btn:hover {
+      background: rgba(16, 185, 129, 0.3);
+    }
+
+    .content-column {
+      flex: 1;
+      min-width: 0;
+      margin-left: var(--sidebar-width);
+    }
+
+    .mobile-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .menu-toggle {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-content {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .page-intro {
+      padding: 30px;
+      margin-bottom: 26px;
+      border: 1px solid rgba(255, 51, 75, 0.25);
+      border-radius: 22px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 51, 75, 0.15),
+        rgba(255, 107, 43, 0.06) 55%,
+        rgba(18, 20, 29, 0.95)
+      );
+    }
+
+    .page-badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: #ff8793;
+      background: rgba(255, 51, 75, 0.12);
+      border: 1px solid rgba(255, 51, 75, 0.25);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .page-description {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .section-title {
+      margin: 28px 0 16px;
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, background 0.25s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .faq-item.active {
+      border-color: rgba(255, 107, 43, 0.4);
+      background: rgba(23, 26, 38, 0.95);
+    }
+
+    .faq-header {
+      width: 100%;
+      padding: 19px 20px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 700;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .faq-header:hover {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .faq-header:focus-visible,
+    .menu-toggle:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent-orange);
+      outline-offset: 3px;
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      color: var(--accent-orange);
+      font-size: 0.9rem;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.25s ease;
+    }
+
+    .faq-content-inner {
+      overflow: hidden;
+      padding: 0 20px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      white-space: normal;
+    }
+
+    .faq-item.active .faq-content {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-item.active .faq-content-inner {
+      padding-bottom: 19px;
+    }
+
+    .faq-content-inner a {
+      color: #ff8b64;
+      text-underline-offset: 3px;
+    }
+
+    .contact-panel {
+      padding: 28px;
+      text-align: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+    }
+
+    .contact-panel h2 {
+      color: var(--accent-orange);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .contact-panel p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+
+    .btn {
+      padding: 15px 22px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      width: 100%;
+      max-width: 320px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-glow-red {
+      background: linear-gradient(135deg, #ff334b, #ff6b2b);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 51, 75, 0.2);
+    }
+
+    .footer {
+      padding: 26px 0 4px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      line-height: 1.9;
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
 
     @media (max-width: 850px) {
-      .sidebar { transform: translateX(-100%); }
-      .sidebar.open { transform: translateX(0); }
-      .main-content { margin-left: 0; padding: 18px 16px; }
-      .mobile-header { display: flex; }
-      .page-title { font-size: 1.5rem; }
-      .faq-header { padding: 16px 18px; font-size: 0.95rem; }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .content-column {
+        margin-left: 0;
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      .main-content {
+        padding: 20px 16px;
+      }
+
+      .page-intro {
+        padding: 23px 19px;
+        border-radius: 18px;
+      }
+
+      .faq-header {
+        padding: 17px;
+        font-size: 0.94rem;
+      }
+
+      .faq-content-inner {
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      .faq-item.active .faq-content-inner {
+        padding-bottom: 17px;
+      }
+
+      .contact-panel {
+        padding: 24px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
-  <link rel="shortcut icon" href="favicon.ico">
 </head>
+
 <body>
-  <div class="menu-overlay" id="overlay" onclick="toggleMenu()"></div>
+  <div class="menu-overlay" id="overlay" aria-hidden="true"></div>
 
   <div class="app-container">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
       <div class="sidebar-header">
-        <a href="index.html" class="brand-logo">
-          <div class="brand-icon"><svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+        <a href="/" class="brand-logo">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
           <span>STANDOFF GOLD</span>
         </a>
       </div>
+
       <nav class="sidebar-nav">
-        <a href="index.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Главная</a>
-        <a href="buy.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>Купить</a>
-        <a href="sell.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Продать</a>
-        <a href="reviews.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>Отзывы</a>
-        <a href="faq.html" class="nav-item active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>FAQ</a>
-        <a href="contacts.html" class="nav-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Контакты</a>
+        <a href="/" class="nav-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          Главная
+        </a>
+
+        <a href="/buy" class="nav-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          Купить
+        </a>
+
+        <a href="/sell" class="nav-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          Продать
+        </a>
+
+        <a href="/reviews" class="nav-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          Отзывы
+        </a>
+
+        <a href="/faq" class="nav-item active" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          FAQ
+        </a>
+
+        <a href="/contacts" class="nav-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          Контакты
+        </a>
       </nav>
 
       <div class="sidebar-tg-links">
-        <a href="https://t.me/STANDOFF_GOLDEX" target="_blank" class="tg-nav-btn">📢 Наш Канал</a>
-        <a href="https://t.me/STANDOFF_GOLDEZ" target="_blank" class="tg-nav-btn">⭐ Отзывы</a>
+        <a href="https://t.me/STANDOFF_GOLDEX" target="_blank" rel="noopener noreferrer" class="tg-nav-btn">📢 Наш канал</a>
+        <a href="https://t.me/STANDOFF_GOLDEZ" target="_blank" rel="noopener noreferrer" class="tg-nav-btn">⭐ Отзывы</a>
       </div>
     </aside>
 
-    <div style="flex:1; display:flex; flex-direction:column;">
+    <div class="content-column">
       <header class="mobile-header">
-        <a href="index.html" class="brand-logo" style="font-size: 1.1rem;">
-          <div class="brand-icon" style="width:28px; height:28px;"><svg viewBox="0 0 24 24" style="width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.5;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg></div>
+        <a href="/" class="brand-logo" style="font-size:1rem;">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
           <span>STANDOFF GOLD</span>
         </a>
-        <button class="menu-toggle" onclick="toggleMenu()">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="sidebar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
       </header>
 
       <main class="main-content">
-        <h1 class="page-title">Вопросы и ответы</h1>
+        <section class="page-intro">
+          <div class="page-badge">❓ Помощь пользователям</div>
+          <h1>Часто задаваемые вопросы</h1>
+          <p class="page-description">
+            Здесь собраны ответы на основные вопросы о покупке и продаже Gold
+            в Standoff 2, порядке обмена, способах связи и безопасности.
+            Если нужного ответа нет, свяжитесь с нами через Telegram.
+          </p>
+        </section>
 
-        <div class="faq-accordion">
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Это официальный сайт Standoff 2?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Нет. Это независимый сервис. Мы не связаны с разработчиками и не представляем Axlebolt.</div>
-          </div>
+        <h2 class="section-title">Покупка и продажа Gold</h2>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Почему "Купить" просит выставить скин?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Так удобно переводить голду через рынок: ты выставляешь скин, а мы выкупаем. Комиссию рынка берём на себя, калькулятор сразу считает цену.</div>
-          </div>
+        <section class="faq-accordion" aria-label="Часто задаваемые вопросы">
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Это официальный сайт Standoff 2?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Нет. STANDOFF GOLD — независимый сервис. Он не является официальным
+                сайтом Standoff 2 и не представляет разработчика Axlebolt.
+              </div>
+            </div>
+          </article>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Вы просите пароль или код?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Никогда. Если кто-то просит пароль/код — это мошенник.</div>
-          </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Как проходит покупка Gold?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Перед покупкой уточните актуальный курс, доступность услуги и
+                порядок передачи Gold у менеджера. Следуйте только согласованным
+                инструкциям и проверяйте данные сделки до подтверждения.
+              </div>
+            </div>
+          </article>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Сколько занимает сделка?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Продажа голды — около 5 минут: выплата уходит автоматически сразу после выкупа скина. Покупка — зачисление от 3 минут после оформления заказа в Telegram-боте.</div>
-          </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Почему для обмена нужно выставить скин?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Внутриигровой рынок может использоваться для передачи предметов
+                и проведения обмена. Конкретные шаги и условия нужно уточнить
+                до сделки. Учитывайте действующие правила игры и комиссию рынка.
+              </div>
+            </div>
+          </article>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Какие способы оплаты доступны?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Выплаты за проданную голду отправляем на карту (Озон Банк, Сбербанк, Т-Банк), по СБП или в USDT.</div>
-          </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Нужно ли сообщать пароль или код подтверждения?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Нет. Не передавайте никому пароль от аккаунта, коды входа,
+                резервные коды или другие секретные данные. Если собеседник
+                просит их, остановите общение и проверьте, действительно ли
+                вы связались с нужным представителем сервиса.
+              </div>
+            </div>
+          </article>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Безопасно ли покупать голду?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Да, абсолютно безопасно. Мы используем проверенные методы передачи голды через внутриигровой маркет. За всё время работы у нас не было ни одного случая бана аккаунта клиента.</div>
-          </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Сколько времени занимает сделка?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Время зависит от наличия Gold, работы внутриигрового рынка,
+                способа оплаты и обработки перевода. Перед сделкой уточните
+                ориентировочные сроки у менеджера. Не считайте перевод завершённым,
+                пока фактически не получите оплату или Gold.
+              </div>
+            </div>
+          </article>
 
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-header"><span>Не забанят ли аккаунт за продажу голды?</span><span class="faq-icon">▼</span></div>
-            <div class="faq-content">Нет. Продажа проходит через официальный игровой рынок Standoff 2: мы не запрашиваем логин и пароль и не входим в твой аккаунт, поэтому риска блокировки нет.</div>
-          </div>
-        </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Какие способы оплаты доступны?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Доступные способы выплаты и оплаты необходимо уточнять у менеджера
+                перед каждой сделкой. Условия могут меняться. Не отправляйте
+                деньги, пока не согласовали сумму, способ перевода и порядок обмена.
+              </div>
+            </div>
+          </article>
 
-        <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px; text-align: center;">
-          <h3 style="margin-bottom: 8px; color: var(--accent-orange);">Нужна помощь?</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px;">Открой Telegram поддержки — ответим и поможем</p>
-          <a href="https://t.me/Kreunen" target="_blank" class="btn btn-glow-red" style="max-width: 320px; margin: 0 auto;">Открыть Telegram @Kreunen</a>
-        </div>
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Может ли аккаунт получить блокировку?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Нельзя гарантировать отсутствие блокировки или других ограничений.
+                Соблюдайте действующие правила Standoff 2 и учитывайте, что
+                сторонние сделки могут иметь риски. Не передавайте данные
+                аккаунта третьим лицам.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Как узнать актуальный курс Gold?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Курс может зависеть от количества Gold и условий сделки.
+                Проверьте информацию на странице
+                <a href="/buy">покупки</a> или
+                <a href="/sell">продажи Gold</a>
+                и подтвердите окончательную сумму у менеджера до обмена.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <h3>
+              <button class="faq-header" type="button" aria-expanded="false">
+                <span>Где можно задать дополнительный вопрос?</span>
+                <span class="faq-icon" aria-hidden="true">▼</span>
+              </button>
+            </h3>
+            <div class="faq-content">
+              <div class="faq-content-inner">
+                Напишите в Telegram по ссылке ниже. Перед началом сделки уточните
+                условия, стоимость, сроки и порядок действий.
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="contact-panel">
+          <h2>Остались вопросы?</h2>
+          <p>
+            Свяжитесь с нами в Telegram, чтобы уточнить условия обмена Gold.
+            Не отправляйте пароли и коды подтверждения.
+          </p>
+          <a
+            href="https://t.me/Kreunen"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-glow-red"
+          >
+            Открыть Telegram поддержки
+          </a>
+        </section>
+
+        <footer class="footer">
+          <p>STANDOFF GOLD — независимый сервис, посвящённый Standoff 2.</p>
+          <p>
+            <a href="/">Главная</a> ·
+            <a href="/buy">Купить Gold</a> ·
+            <a href="/sell">Продать Gold</a> ·
+            <a href="/reviews">Отзывы</a> ·
+            <a href="/contacts">Контакты</a>
+          </p>
+          <p>© 2026 STANDOFF GOLD</p>
+        </footer>
       </main>
     </div>
   </div>
 
   <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuToggle = document.getElementById('menuToggle');
+
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Открыть меню');
+    }
+
     function toggleMenu() {
-      document.getElementById('sidebar').classList.toggle('open');
-      document.getElementById('overlay').classList.toggle('active');
+      const isOpen = !sidebar.classList.contains('open');
+
+      sidebar.classList.toggle('open', isOpen);
+      overlay.classList.toggle('active', isOpen);
+      overlay.setAttribute('aria-hidden', String(!isOpen));
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Закрыть меню' : 'Открыть меню'
+      );
     }
-    function toggleFaq(el) {
-      el.classList.toggle('active');
-    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    document.querySelectorAll('.faq-header').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isOpen = item.classList.contains('active');
+
+        item.classList.toggle('active', !isOpen);
+        button.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+
+    document.querySelectorAll('.sidebar-nav a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
   </script>
 </body>
 </html>
